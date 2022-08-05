@@ -5,10 +5,14 @@
 //  Created by jordon on 2022-07-30.
 //
 
-#include "pipe.hpp"
+#include "pipe.h"
 
-Pipe::Pipe(float x, float y, Size size) {
+Pipe::Pipe(float x, float y, Texture2D texture) {
     xPos = x;
     yPos = y;
-    vecSize = GetSize(size);
+    image = texture;
+}
+
+void Pipe::Render() {
+  DrawTexture(image, xPos, yPos, WHITE);
 }

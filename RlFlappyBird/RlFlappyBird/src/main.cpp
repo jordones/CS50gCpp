@@ -6,7 +6,7 @@
 //
 
 #include "raylib.h"
-#include "pipe.hpp"
+#include "pipe.h"
 #include "bird.h"
 #include <iostream>
 
@@ -29,8 +29,11 @@ int main(void)
     Texture2D ground = LoadTexture("../assets/ground.png");
     float groundScrollOffset = 0.0f;
     float groundScrollSpeed = 60.0f;
-    // Texture2D bird = LoadTexture("../assets/bird.png");        // Texture loading
+    
     Bird bird;
+
+    Texture2D tPipe = LoadTexture("../assets/pipe.png");
+    Pipe pipe(10, 10, tPipe);
 
     while (!WindowShouldClose())
     {
@@ -55,6 +58,7 @@ int main(void)
             DrawTextureV(background, (Vector2){ backgroundScrollOffset, 0 }, WHITE);
             DrawTextureV(ground, (Vector2){ groundScrollOffset, (float) WINDOW_HEIGHT - ground.height }, WHITE);
             bird.Render();
+            pipe.Render();
             DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
             DrawFPS(10, 10);
           }

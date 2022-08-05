@@ -1,5 +1,10 @@
+# Debug
+*.dSYM
+*.log
+
 # Prerequisites
 *.d
+raylib-4.0.0
 
 # Compiled Object files
 *.slo
@@ -23,13 +28,14 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
+#*.a
 *.lib
 
 # Executables
 *.exe
 *.out
 *.app
+build/
 
 # Mac stuff
 .DS_Store

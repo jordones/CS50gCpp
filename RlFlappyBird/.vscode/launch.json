@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "(lldb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/RlFlappyBird/build/main",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/RlFlappyBird/src",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        }
+    ],
+    "version": "2.0.0"
+}

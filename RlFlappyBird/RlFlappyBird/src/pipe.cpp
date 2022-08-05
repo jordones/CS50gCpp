@@ -7,10 +7,17 @@
 
 #include "pipe.h"
 
-Pipe::Pipe(float x, float y, Texture2D texture) {
-    xPos = x;
-    yPos = y;
+float pipeScrollSpeed = -60.0f;
+
+Pipe::Pipe(Texture2D texture) {
+    xPos = 10;
+    yPos = -rand() % (GetScreenHeight() / 4) + (GetScreenHeight() - 10);
     image = texture;
+    width = texture.width;
+}
+
+void Pipe::Update(float dt) {
+  xPos -= pipeScrollSpeed * dt;
 }
 
 void Pipe::Render() {

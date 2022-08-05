@@ -9,13 +9,16 @@
 
 #include "raylib.h"
 #include <iostream>
+#include <stdlib.h>
 
 class Pipe {
 public:
   float xPos, yPos;
+  int width;
 private:
   Texture2D image;
 public:
-  Pipe(float x, float y, Texture2D image);
+  Pipe(Texture2D image);
+  void Update(float dt);
   void Render();
 };

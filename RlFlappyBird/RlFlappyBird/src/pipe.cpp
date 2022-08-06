@@ -10,14 +10,14 @@
 float pipeScrollSpeed = -60.0f;
 
 Pipe::Pipe(Texture2D texture) {
-    xPos = 10;
-    yPos = -rand() % (GetScreenHeight() / 4) + (GetScreenHeight() - 10);
+    yPos = -rand() % (GetScreenHeight() / 4) + (GetScreenHeight() - 60);
     image = texture;
     width = texture.width;
+    xPos = GetScreenWidth() + width;
 }
 
 void Pipe::Update(float dt) {
-  xPos -= pipeScrollSpeed * dt;
+  xPos += pipeScrollSpeed * dt;
 }
 
 void Pipe::Render() {

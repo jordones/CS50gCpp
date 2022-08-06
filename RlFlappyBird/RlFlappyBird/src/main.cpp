@@ -10,6 +10,7 @@
 #include "bird.h"
 #include <iostream>
 #include <stdlib.h>
+#include <vector>
 
 int WINDOW_WIDTH = 512;
 int WINDOW_HEIGHT = 288;
@@ -38,7 +39,7 @@ int main(void)
     Bird bird;
 
     Texture2D tPipe = LoadTexture("../assets/pipe.png");
-    Pipe pipe(tPipe);
+    std::vector<Pipe> pipes;
 
     while (!WindowShouldClose())
     {
@@ -48,13 +49,18 @@ int main(void)
         {
           spawnTimer += dt;
           if (spawnTimer > 2.0f) {
-            // Spawn a pipe and add it to a list
+            pipes.push_back(Pipe(tPipe));
             spawnTimer = 0.0f;
           }
 
-          // iterate pipes
-          // if pipe.x < -pipe.width remove it from the list
-
+          for (int i = 0; i < pipes.size(); i++)
+          {
+            pipes[i].Update(dt);
+            if (pipes[i].xPos < -pipes[i].width)
+            {
+              pipes.erase(pipes.begin() + i);
+            }
+          }
           backgroundScrollOffset -= backgroundScrollSpeed * dt;
           if (backgroundScrollOffset < -backgroundLoopPoint) backgroundScrollOffset = 0;
           groundScrollOffset -= groundScrollSpeed * dt;
@@ -70,11 +76,12 @@ int main(void)
           {
             ClearBackground(RAYWHITE);
             DrawTextureV(background, (Vector2){ backgroundScrollOffset, 0 }, WHITE);
-            // pipe.Render();
-            // iterate over pipes and render
+            for (Pipe& p : pipes)
+            {
+              p.Render();
+            }
             DrawTextureV(ground, (Vector2){ groundScrollOffset, (float) WINDOW_HEIGHT - ground.height }, WHITE);
             bird.Render();
-            DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
             DrawFPS(10, 10);
           }
           EndDrawing();

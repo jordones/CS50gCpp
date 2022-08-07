@@ -42,32 +42,22 @@ int main(void)
     Texture2D tPipe = LoadTexture("../assets/pipe.png");
     std::vector<PipePair> pairs;
     int previousPipeYCoord = 0;
-        int y = std::max<int>(
-              -tPipe.height + 10,
-              std::min(
-                previousPipeYCoord + (rand() % 40 - 20), WINDOW_HEIGHT - 150 - tPipe.height
-              )
-            );
-            previousPipeYCoord = y;
-            pairs.push_back(PipePair(tPipe, y));
+
     while (!WindowShouldClose())
     {
         // Update
         //----------------------------------------------------------------------------------
         float dt = GetFrameTime();
         {
-          // spawnTimer += dt;
+          spawnTimer += dt;
           if (spawnTimer > 2.0f) {
             /*
             -- modify the last Y coordinate we placed so pipe gaps aren't too far apart
             -- no higher than 10 pixels below the top edge of the screen,
             -- and no lower than a gap length (90 pixels) from the bottom
-            local y = math.max(-PIPE_HEIGHT + 10, 
-                math.min(lastY + math.random(-20, 20), VIRTUAL_HEIGHT - 90 - PIPE_HEIGHT))
-            lastY = y
             */
             int y = std::max<int>(
-              -tPipe.height + 10,
+              -tPipe.height + 30,
               std::min(
                 previousPipeYCoord + (rand() % 40 - 20), WINDOW_HEIGHT - 150 - tPipe.height
               )

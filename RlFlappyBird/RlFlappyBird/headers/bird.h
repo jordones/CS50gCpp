@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "pipe.h"
 
 class Bird {
 private:
@@ -15,6 +16,7 @@ public:
   Bird();
   void Render();
   void Update(float dt);
+  bool Collides(Pipe p);
   ~Bird() {
     UnloadTexture(image);
   }

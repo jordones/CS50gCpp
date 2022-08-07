@@ -10,7 +10,8 @@ class PipePair {
 protected:
   static const int GAP_HEIGHT = 90;
 private:
-  int xPos, yPos;
+  float xPos, yPos;
+  int textureWidth;
   std::vector<Pipe> pipes;
 public:
   bool remove;

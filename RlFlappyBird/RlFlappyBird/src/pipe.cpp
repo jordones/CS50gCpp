@@ -7,21 +7,21 @@
 
 #include "pipe.h"
 
-float pipeScrollSpeed = -60.0f;
+extern int WINDOW_HEIGHT;
+extern int WINDOW_WIDTH;
 
 Pipe::Pipe(Texture2D texture, int y, Side position) {
-    // yPos = -rand() % (GetScreenHeight() / 4) + (GetScreenHeight() - 60);
+    xPos = WINDOW_WIDTH;
     yPos = y;
     image = texture;
     width = texture.width;
-    xPos = GetScreenWidth() + width;
+    height = texture.height;
     side = position;
 }
 
-void Pipe::Update(float dt) {
-  xPos += pipeScrollSpeed * dt;
-}
-
 void Pipe::Render() {
-  DrawTexture(image, xPos, yPos, WHITE);
+    float yTranslated = side == Top ? yPos + height : yPos;
+    float xTranslated = side == Top ? xPos + width : xPos;
+    float scale = side == Top ? -1 : 1;
+    DrawTextureEx(image, Vector2 { xTranslated, yTranslated }, 0.0f, scale, WHITE);
 }

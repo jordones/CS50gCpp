@@ -33,3 +33,19 @@ void Bird::Update(float dt)
 
   position.y += velocity.y;
 }
+
+// AABB collision check
+bool Bird::Collides(Pipe p) 
+{
+  int leftTopOffset = 4;
+  int rightBottomOffset = 4;
+  
+  bool leftCollision = (position.x + leftTopOffset) + (width - rightBottomOffset) >= p.xPos;
+  bool rightCollision = (position.x + leftTopOffset) <= p.xPos + p.width;
+  bool bottomCollision = position.y + height - rightBottomOffset >= p.yPos;
+  bool topCollision = position.y + leftTopOffset <= p.yPos + p.height;
+  if (leftCollision && rightCollision)
+   if (bottomCollision && topCollision)
+    return true;
+  return false;
+}

@@ -43,12 +43,16 @@ int main(void)
     std::vector<PipePair> pairs;
     int previousPipeYCoord = 0;
 
+    bool scrolling = true;
+
     while (!WindowShouldClose())
     {
         // Update
         //----------------------------------------------------------------------------------
-        float dt = GetFrameTime();
+        if (scrolling)
         {
+          float dt = GetFrameTime();
+
           spawnTimer += dt;
           if (spawnTimer > 2.0f) {
             /*
@@ -68,8 +72,15 @@ int main(void)
             spawnTimer = 0.0f;
           }
 
-          for (PipePair& p : pairs)
+          bird.Update(dt);
+
+          for (PipePair& p : pairs) {
             p.Update(dt);
+            // Pause on Collision
+            if (bird.Collides(p.pipes[Pipe::Top]) || bird.Collides(p.pipes[Pipe::Bottom])) {
+              scrolling = false;
+            }
+          }
 
           // Remove flagged pipes
           for (int i = 0; i < pairs.size(); i++)
@@ -84,7 +95,6 @@ int main(void)
           if (backgroundScrollOffset < -backgroundLoopPoint) backgroundScrollOffset = 0;
           groundScrollOffset -= groundScrollSpeed * dt;
           groundScrollOffset = (int) groundScrollOffset % WINDOW_WIDTH;
-          bird.Update(dt);
         }
         //----------------------------------------------------------------------------------
 

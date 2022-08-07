@@ -12,8 +12,8 @@ protected:
 private:
   float xPos, yPos;
   int textureWidth;
-  std::vector<Pipe> pipes;
 public:
+  std::vector<Pipe> pipes;
   bool remove;
   PipePair(Texture2D texture, int y);
   void Update(float dt);

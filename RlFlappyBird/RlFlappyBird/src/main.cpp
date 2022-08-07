@@ -8,6 +8,7 @@
 #include "raylib.h"
 #include "pipe.h"
 #include "bird.h"
+#include "pipePair.h"
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
@@ -39,7 +40,8 @@ int main(void)
     Bird bird;
 
     Texture2D tPipe = LoadTexture("../assets/pipe.png");
-    std::vector<Pipe> pipes;
+    std::vector<PipePair> pairs;
+    int previousPipeYCoord = 0;
 
     while (!WindowShouldClose())
     {
@@ -49,18 +51,38 @@ int main(void)
         {
           spawnTimer += dt;
           if (spawnTimer > 2.0f) {
-            pipes.push_back(Pipe(tPipe));
+            /*
+            -- modify the last Y coordinate we placed so pipe gaps aren't too far apart
+            -- no higher than 10 pixels below the top edge of the screen,
+            -- and no lower than a gap length (90 pixels) from the bottom
+            local y = math.max(-PIPE_HEIGHT + 10, 
+                math.min(lastY + math.random(-20, 20), VIRTUAL_HEIGHT - 90 - PIPE_HEIGHT))
+            lastY = y
+            */
+            int y = std::max<int>(
+              -tPipe.height + 10,
+              std::min(
+                previousPipeYCoord + (rand() % 40 - 20), GetScreenHeight() - 90 - tPipe.height
+              )
+            );
+            previousPipeYCoord = y;
+            pairs.push_back(PipePair(tPipe, y));
+
             spawnTimer = 0.0f;
           }
 
-          for (int i = 0; i < pipes.size(); i++)
+          for (PipePair& p : pairs)
+            p.Update(dt);
+
+          // Remove flagged pipes
+          for (int i = 0; i < pairs.size(); i++)
           {
-            pipes[i].Update(dt);
-            if (pipes[i].xPos < -pipes[i].width)
+            if (pairs[i].remove)
             {
-              pipes.erase(pipes.begin() + i);
+              pairs.erase(pairs.begin() + i);
             }
           }
+
           backgroundScrollOffset -= backgroundScrollSpeed * dt;
           if (backgroundScrollOffset < -backgroundLoopPoint) backgroundScrollOffset = 0;
           groundScrollOffset -= groundScrollSpeed * dt;
@@ -76,7 +98,7 @@ int main(void)
           {
             ClearBackground(RAYWHITE);
             DrawTextureV(background, (Vector2){ backgroundScrollOffset, 0 }, WHITE);
-            for (Pipe& p : pipes)
+            for (PipePair& p : pairs)
             {
               p.Render();
             }
@@ -90,6 +112,8 @@ int main(void)
 
     UnloadTexture(background);        // Texture unloading
     UnloadTexture(ground);        // Texture unloading
+    UnloadTexture(tPipe);        // Texture unloading
+
     CloseWindow();
 
     return 0;

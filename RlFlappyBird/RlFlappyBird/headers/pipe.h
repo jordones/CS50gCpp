@@ -13,12 +13,17 @@
 
 class Pipe {
 public:
+  enum Side {
+    Top = 0, Bottom = 1
+  };
+
   float xPos, yPos;
   int width;
+  Side side;
 private:
   Texture2D image;
 public:
-  Pipe(Texture2D image);
+  Pipe(Texture2D image, int y, Side position);
   void Update(float dt);
   void Render();
 };

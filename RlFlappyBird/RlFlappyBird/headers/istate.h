@@ -1,10 +1,13 @@
+#pragma once
+
 #include <string>
 #include <vector>
 #include <iostream>
 #include "raylib.h"
 
 enum StateName {
-  Empty
+  Empty,
+  Play
 };
 
 struct StateChangeParams {

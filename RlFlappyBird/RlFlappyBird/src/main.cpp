@@ -10,6 +10,7 @@
 #include "bird.h"
 #include "pipePair.h"
 #include "stateMachine.h"
+#include "playState.h"
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
@@ -24,6 +25,8 @@ int main(void)
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "raylib [core] example - basic window");
     SetTargetFPS(60);
+    gStateMachine.PushState(new PlayState());
+    gStateMachine.Change(Play, { 0 , false });
     // gStateMachine.Change(StateName::Empty, { 0, false});
     float spawnTimer = 0.0f;
     // Textures
@@ -80,6 +83,8 @@ int main(void)
             // Pause on Collision
             if (bird.Collides(p.pipes[Pipe::Top]) || bird.Collides(p.pipes[Pipe::Bottom])) {
               scrolling = false;
+              gStateMachine.Change(Empty, { 0 , false });
+
             }
           }
 

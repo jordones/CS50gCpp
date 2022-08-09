@@ -3,7 +3,7 @@ DEBUG       ?= FALSE
 CFLAGS      = -std=c++11 -lstdc++
 LIBS        = lib/libraylib.a
 FRAMEWORKS  = -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT -framework OpenGL
-CPP_FILES   = src/main.cpp src/pipe.cpp src/bird.cpp src/pipePair.cpp src/stateMachine.cpp
+CPP_FILES   = src/main.cpp src/pipe.cpp src/bird.cpp src/pipePair.cpp src/stateMachine.cpp src/states/playState.cpp
 BINARY      = build/main
 
 ifeq ($(DEBUG), TRUE)

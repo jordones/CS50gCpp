@@ -11,7 +11,7 @@ public:
   StateMachine();
   ~StateMachine();
   // StateMachine(std::vector<IState&> initStates);
-
+  void PushState(IState* state);
   void Change(StateName stateName, StateChangeParams params);
   void Update(float dt);
   void Render();

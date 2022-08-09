@@ -10,6 +10,10 @@ StateMachine::~StateMachine() {
   //   delete s;
 }
 
+void StateMachine::PushState(IState* state) {
+  states.push_back(state);
+}
+
 void StateMachine::Change(StateName stateName, StateChangeParams params) {
   for (int i = 0; i < states.size(); i++) {
     if (states[i]->name == stateName) {

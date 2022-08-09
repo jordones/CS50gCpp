@@ -9,12 +9,14 @@
 #include "pipe.h"
 #include "bird.h"
 #include "pipePair.h"
+#include "stateMachine.h"
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
 
 int WINDOW_WIDTH = 512;
 int WINDOW_HEIGHT = 288;
+StateMachine gStateMachine;
 
 int main(void)
 {
@@ -22,16 +24,15 @@ int main(void)
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "raylib [core] example - basic window");
     SetTargetFPS(60);
-
+    // gStateMachine.Change(StateName::Empty, { 0, false});
     float spawnTimer = 0.0f;
-
     // Textures
     // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
     //----------------------------------------------------------------------------------
     Texture2D background = LoadTexture("../assets/background.png");
     float backgroundScrollOffset = 0.0f;
     float backgroundScrollSpeed = 30.0f;
-    int backgroundLoopPoint = 413;
+      int backgroundLoopPoint = 413;
 
     Texture2D ground = LoadTexture("../assets/ground.png");
     float groundScrollOffset = 0.0f;
@@ -95,6 +96,7 @@ int main(void)
           if (backgroundScrollOffset < -backgroundLoopPoint) backgroundScrollOffset = 0;
           groundScrollOffset -= groundScrollSpeed * dt;
           groundScrollOffset = (int) groundScrollOffset % WINDOW_WIDTH;
+          gStateMachine.Update(dt);
         }
         //----------------------------------------------------------------------------------
 
@@ -110,6 +112,7 @@ int main(void)
             DrawTextureV(ground, (Vector2){ groundScrollOffset, (float) WINDOW_HEIGHT - ground.height }, WHITE);
             bird.Render();
             DrawFPS(10, 10);
+            gStateMachine.Render();
           }
           EndDrawing();
         }

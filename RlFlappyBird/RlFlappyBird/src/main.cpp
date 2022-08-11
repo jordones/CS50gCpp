@@ -20,6 +20,14 @@ int WINDOW_HEIGHT = 288;
 StateMachine gStateMachine;
 bool scrolling = true;
 
+// Global Fonts
+//----------------------------------------------------------------------------------
+Font smallFont;
+Font mediumFont;
+Font flappyFont;
+Font hugeFont;
+//----------------------------------------------------------------------------------
+
 int main(void)
 {
   srand(time(NULL));
@@ -40,6 +48,11 @@ int main(void)
   Texture2D ground = LoadTexture("../assets/ground.png");
   float groundScrollOffset = 0.0f;
   float groundScrollSpeed = 60.0f;
+
+  smallFont = LoadFontEx("../assets/font.ttf", 8, NULL, 0);
+  mediumFont = LoadFontEx("../assets/flappy.ttf", 14, NULL, 0);
+  flappyFont = LoadFontEx("../assets/flappy.ttf", 28, NULL, 0);
+  hugeFont = LoadFontEx("../assets/flappy.ttf", 56, NULL, 0);
 
   while (!WindowShouldClose())
   {

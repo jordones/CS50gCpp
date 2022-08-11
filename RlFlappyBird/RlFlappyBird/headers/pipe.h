@@ -11,17 +11,22 @@
 #include <iostream>
 #include <stdlib.h>
 
-class Pipe {
+class Pipe
+{
 public:
-  enum Side {
-    Top = 0, Bottom = 1
+  enum Side
+  {
+    Top = 0,
+    Bottom = 1
   };
   static constexpr float Speed = 60.0f;
   float xPos, yPos;
   int width, height;
   Side side;
+
 private:
   Texture2D image;
+
 public:
   Pipe(Texture2D image, int y, Side position);
   void Render();

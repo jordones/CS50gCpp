@@ -3,7 +3,8 @@
 #include "bird.h"
 #include "pipePair.h"
 
-class PlayState : public IState {
+class PlayState : public IState
+{
 protected:
   Bird bird;
   Texture2D tPipe;

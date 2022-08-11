@@ -2,9 +2,11 @@
 #include "raylib.h"
 #include "pipe.h"
 
-class Bird {
+class Bird
+{
 private:
   Texture2D image;
+
 public:
   static const int GRAVITY = 20;
   static const int UPWARD_FORCE = -5;
@@ -17,7 +19,8 @@ public:
   void Render();
   void Update(float dt);
   bool Collides(Pipe p);
-  ~Bird() {
+  ~Bird()
+  {
     UnloadTexture(image);
   }
 };

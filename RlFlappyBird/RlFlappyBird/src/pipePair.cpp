@@ -1,6 +1,7 @@
 #include "pipePair.h"
 
-PipePair::PipePair(Texture2D texture, int y) {
+PipePair::PipePair(Texture2D texture, int y)
+{
   remove = false;
   xPos = GetScreenWidth();
   yPos = y;
@@ -9,17 +10,22 @@ PipePair::PipePair(Texture2D texture, int y) {
   pipes.push_back(Pipe(texture, y + texture.height + GAP_HEIGHT, Pipe::Bottom));
 }
 
-void PipePair::Update(float dt) {
-  if (xPos > -textureWidth) {
+void PipePair::Update(float dt)
+{
+  if (xPos > -textureWidth)
+  {
     xPos = xPos - (Pipe::Speed * dt);
     pipes[Pipe::Top].xPos = xPos;
     pipes[Pipe::Bottom].xPos = xPos;
-  } else {
+  }
+  else
+  {
     remove = true;
   }
 }
 
-void PipePair::Render() {
-    pipes[Pipe::Top].Render();
-    pipes[Pipe::Bottom].Render();
+void PipePair::Render()
+{
+  pipes[Pipe::Top].Render();
+  pipes[Pipe::Bottom].Render();
 }

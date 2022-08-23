@@ -29,7 +29,7 @@ void TitleScreenState::Update(float dt)
 {
   if (IsKeyPressed(KEY_SPACE))
   {
-    gStateMachine.Change(Play, {0, false});
+    gStateMachine.Change(Countdown, {0, false});
   }
 }
 

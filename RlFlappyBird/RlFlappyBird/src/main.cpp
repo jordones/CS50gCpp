@@ -12,6 +12,7 @@
 #include "stateMachine.h"
 #include "playState.h"
 #include "titleScreenState.h"
+#include "countdownState.h"
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
@@ -36,6 +37,7 @@ int main(void)
   InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "raylib [core] example - basic window");
   SetTargetFPS(60);
   gStateMachine.PushState(new TitleScreenState());
+  gStateMachine.PushState(new CountdownState());
   gStateMachine.PushState(new PlayState());
   gStateMachine.Change(TitleScreen, {0, false});
 

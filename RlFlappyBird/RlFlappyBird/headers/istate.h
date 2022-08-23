@@ -10,6 +10,7 @@ enum StateName
   Empty,
   Play,
   TitleScreen,
+  Countdown,
 };
 
 struct StateChangeParams

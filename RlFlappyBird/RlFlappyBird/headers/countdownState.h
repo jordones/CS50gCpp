@@ -1,11 +1,17 @@
 #pragma once
 #include "istate.h"
 
-class TitleScreenState : public IState
+class CountdownState : public IState
 {
+protected:
+  float countdownTimer;
+  int countdownValue;
+  char countString = '3';
+  char *char_ptr;
+
 public:
-  TitleScreenState();
-  ~TitleScreenState();
+  CountdownState();
+  ~CountdownState();
   void Enter(StateChangeParams params) override;
   void Exit() override;
   void Update(float dt) override;

@@ -6,6 +6,7 @@ extern StateMachine gStateMachine;
 extern bool scrolling;
 extern int WINDOW_HEIGHT;
 extern int WINDOW_WIDTH;
+extern Font mediumFont;
 
 PlayState::PlayState()
 {
@@ -75,7 +76,7 @@ void PlayState::Update(float dt)
 
 void PlayState::Render()
 {
-  DrawText("PlayState", 20, 30, 16, BLACK);
+  DrawTextEx(mediumFont, "PlayState", {20, 30}, 14.0f, 1.0f, BLACK);
   for (PipePair &p : pairs)
     p.Render();
   bird.Render();

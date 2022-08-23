@@ -4,10 +4,9 @@
 class CountdownState : public IState
 {
 protected:
-  float countdownTimer;
-  int countdownValue;
+  float timeElapsed;
+  int secondsElapsed = 0;
   char countString = '3';
-  char *char_ptr;
 
 public:
   CountdownState();

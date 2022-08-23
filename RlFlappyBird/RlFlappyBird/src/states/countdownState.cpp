@@ -9,8 +9,6 @@ extern int WINDOW_WIDTH;
 CountdownState::CountdownState()
 {
   name = Countdown;
-  countdownValue = 0;
-  char_ptr = &countString;
 }
 
 CountdownState::~CountdownState()
@@ -29,14 +27,14 @@ void CountdownState::Exit()
 
 void CountdownState::Update(float dt)
 {
-  countdownTimer += dt;
-  if (countdownTimer > 1.0f)
+  timeElapsed += dt;
+  if (timeElapsed > 1.0f)
   {
-    countdownValue++;
+    secondsElapsed++;
     countString--;
-    countdownTimer = 0;
+    timeElapsed = 0;
   }
-  if (countdownValue >= 3)
+  if (secondsElapsed >= 3)
   {
     gStateMachine.Change(Play, {0, false});
   }
@@ -45,6 +43,6 @@ void CountdownState::Update(float dt)
 void CountdownState::Render()
 {
   DrawTextEx(mediumFont, "CountdownState", {20, 30}, 14.0f, 1.0f, BLACK);
-  Vector2 textSize = MeasureTextEx(mediumFont, char_ptr, 14.0f, 1.0f);
-  DrawTextEx(mediumFont, char_ptr, {(float)WINDOW_WIDTH / 2 - textSize.x / 2, (float)WINDOW_HEIGHT / 2 - textSize.y / 2}, 14.0f, 1.0f, BLACK);
+  Vector2 textSize = MeasureTextEx(mediumFont, &countString, 14.0f, 1.0f);
+  DrawTextEx(mediumFont, &countString, {(float)WINDOW_WIDTH / 2 - textSize.x / 2, (float)WINDOW_HEIGHT / 2 - textSize.y / 2}, 14.0f, 1.0f, BLACK);
 }

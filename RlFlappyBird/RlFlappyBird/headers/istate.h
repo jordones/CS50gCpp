@@ -8,7 +8,8 @@
 enum StateName
 {
   Empty,
-  Play
+  Play,
+  TitleScreen,
 };
 
 struct StateChangeParams

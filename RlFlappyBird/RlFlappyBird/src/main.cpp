@@ -11,6 +11,7 @@
 #include "pipePair.h"
 #include "stateMachine.h"
 #include "playState.h"
+#include "titleScreenState.h"
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
@@ -34,8 +35,9 @@ int main(void)
 
   InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "raylib [core] example - basic window");
   SetTargetFPS(60);
-  gStateMachine.PushState(new PlayState()); // This is how I'm adding states for now
-  gStateMachine.Change(Play, {0, false});
+  gStateMachine.PushState(new TitleScreenState());
+  gStateMachine.PushState(new PlayState());
+  gStateMachine.Change(TitleScreen, {0, false});
 
   // Textures
   // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)

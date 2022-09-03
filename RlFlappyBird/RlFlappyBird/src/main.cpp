@@ -46,11 +46,12 @@ int main(void)
 
   InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "raylib [core] example - basic window");
   InitAudioDevice();
+  SetMasterVolume(0.05f);
   SetTargetFPS(60);
-  gStateMachine.PushState(new TitleScreenState());
-  gStateMachine.PushState(new CountdownState());
-  gStateMachine.PushState(new PlayState());
-  gStateMachine.PushState(new ScoreState());
+  // gStateMachine.PushState(new TitleScreenState());
+  // gStateMachine.PushState(new CountdownState());
+  // gStateMachine.PushState(new PlayState());
+  // gStateMachine.PushState(new ScoreState());
   gStateMachine.Change(TitleScreen, {0, false});
 
   // Textures
@@ -119,6 +120,7 @@ int main(void)
   UnloadSound(hurtSound);
   UnloadSound(scoreSound);
   UnloadSound(backgroundMusic);
+  CloseAudioDevice();
   CloseWindow();
 
   return 0;

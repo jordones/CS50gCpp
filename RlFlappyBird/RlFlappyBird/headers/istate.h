@@ -24,6 +24,7 @@ class IState
 {
 public:
   StateName name;
+  virtual ~IState() = default;
   virtual void Enter(StateChangeParams params) = 0;
   virtual void Exit() = 0;
   virtual void Update(float dt) = 0;

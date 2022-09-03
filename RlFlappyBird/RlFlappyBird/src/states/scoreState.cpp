@@ -7,6 +7,7 @@ extern Font flappyFont;
 extern Font mediumFont;
 extern int WINDOW_HEIGHT;
 extern int WINDOW_WIDTH;
+extern bool scrolling;
 
 ScoreState::ScoreState()
 {
@@ -33,6 +34,7 @@ void ScoreState::Update(float dt)
   if (IsKeyPressed(KEY_P))
   {
     std::cout << "Countdown" << std::endl;
+    scrolling = true;
     gStateMachine.Change(Countdown, {0, false});
   }
 }

@@ -3,9 +3,6 @@
 
 class ScoreState : public IState
 {
-protected:
-  int score = 0;
-
 public:
   ScoreState();
   ~ScoreState();

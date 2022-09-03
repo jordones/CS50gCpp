@@ -64,7 +64,7 @@ int main(void)
   {
     // Update
     //----------------------------------------------------------------------------------
-    if (scrolling)
+    if (scrolling || gStateMachine.current->name != Play)
     {
       float dt = GetFrameTime();
       backgroundScrollOffset -= backgroundScrollSpeed * dt;

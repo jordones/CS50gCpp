@@ -13,6 +13,7 @@ CountdownState::CountdownState()
 
 CountdownState::~CountdownState()
 {
+  std::cout << "Cleaned CountdownState" << std::endl;
 }
 
 void CountdownState::Enter(StateChangeParams params)

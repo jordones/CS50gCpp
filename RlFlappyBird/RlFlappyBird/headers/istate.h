@@ -11,6 +11,7 @@ enum StateName
   Play,
   TitleScreen,
   Countdown,
+  Score,
 };
 
 struct StateChangeParams

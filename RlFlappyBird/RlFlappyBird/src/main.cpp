@@ -13,6 +13,7 @@
 #include "playState.h"
 #include "titleScreenState.h"
 #include "countdownState.h"
+#include "scoreState.h"
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
@@ -39,6 +40,7 @@ int main(void)
   gStateMachine.PushState(new TitleScreenState());
   gStateMachine.PushState(new CountdownState());
   gStateMachine.PushState(new PlayState());
+  gStateMachine.PushState(new ScoreState());
   gStateMachine.Change(TitleScreen, {0, false});
 
   // Textures

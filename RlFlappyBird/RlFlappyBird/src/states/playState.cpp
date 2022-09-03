@@ -1,6 +1,7 @@
 #include "playState.h"
 #include "pipe.h"
 #include "stateMachine.h"
+#include <string>
 
 extern StateMachine gStateMachine;
 extern bool scrolling;
@@ -89,6 +90,9 @@ void PlayState::Update(float dt)
 void PlayState::Render()
 {
   DrawTextEx(mediumFont, "PlayState", {20, 30}, 14.0f, 1.0f, BLACK);
+  std::string scoreOutput = "Score: " + std::to_string(score);
+  DrawTextEx(mediumFont, scoreOutput.c_str(), {20, 50}, 14.0f, 1.0f, BLACK);
+
   for (PipePair &p : pairs)
     p.Render();
   bird.Render();

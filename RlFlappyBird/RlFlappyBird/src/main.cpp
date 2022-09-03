@@ -48,10 +48,6 @@ int main(void)
   InitAudioDevice();
   SetMasterVolume(0.05f);
   SetTargetFPS(60);
-  // gStateMachine.PushState(new TitleScreenState());
-  // gStateMachine.PushState(new CountdownState());
-  // gStateMachine.PushState(new PlayState());
-  // gStateMachine.PushState(new ScoreState());
   gStateMachine.Change(TitleScreen, {0, false});
 
   // Textures

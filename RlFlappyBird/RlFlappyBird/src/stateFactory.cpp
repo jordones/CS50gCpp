@@ -4,11 +4,10 @@
 #include "titleScreenState.h"
 #include "countdownState.h"
 
-IState *StateFactory::CreateState(StateName stateName, StateChangeParams params)
+IState *StateFactory::CreateState(StateName stateName)
 {
   switch (stateName)
   {
-
   case Play:
     return new PlayState();
   case TitleScreen:

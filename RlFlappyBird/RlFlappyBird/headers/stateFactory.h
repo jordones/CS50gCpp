@@ -6,5 +6,5 @@
 class StateFactory
 {
 public:
-  IState *CreateState(StateName stateName, StateChangeParams params);
+  IState *CreateState(StateName stateName);
 };

@@ -76,11 +76,15 @@ int main(void)
   scoreSound = LoadSound("../assets/score.wav");
   backgroundMusic = LoadSound("../assets/marios_way.mp3");
 
-  PlaySound(backgroundMusic);
   while (!WindowShouldClose())
   {
     // Update
     //----------------------------------------------------------------------------------
+    if (!IsSoundPlaying(backgroundMusic))
+    {
+      PlaySound(backgroundMusic);
+    }
+
     if (scrolling || gStateMachine.current->name != Play)
     {
       float dt = GetFrameTime();

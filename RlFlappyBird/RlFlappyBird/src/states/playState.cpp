@@ -8,6 +8,9 @@ extern bool scrolling;
 extern int WINDOW_HEIGHT;
 extern int WINDOW_WIDTH;
 extern Font mediumFont;
+extern Sound scoreSound;
+extern Sound hurtSound;
+extern Sound explosionSound;
 
 PlayState::PlayState()
 {
@@ -63,6 +66,7 @@ void PlayState::Update(float dt)
     {
       if (p.xPos + p.textureWidth < bird.position.x)
       {
+        PlaySound(scoreSound);
         score++;
         std::cout << "Score: " << score << std::endl;
         p.scored = true;
@@ -72,6 +76,8 @@ void PlayState::Update(float dt)
     // Pause on Collision
     if (bird.Collides(p.pipes[Pipe::Top]) || bird.Collides(p.pipes[Pipe::Bottom]))
     {
+      PlaySound(hurtSound);
+      PlaySound(explosionSound);
       scrolling = false;
       gStateMachine.Change(Score, {score, false});
     }

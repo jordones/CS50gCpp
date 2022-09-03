@@ -31,11 +31,21 @@ Font flappyFont;
 Font hugeFont;
 //----------------------------------------------------------------------------------
 
+// Global Sounds
+//----------------------------------------------------------------------------------
+Sound jumpSound;
+Sound explosionSound;
+Sound hurtSound;
+Sound scoreSound;
+Sound backgroundMusic;
+//----------------------------------------------------------------------------------
+
 int main(void)
 {
   srand(time(NULL));
 
   InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "raylib [core] example - basic window");
+  InitAudioDevice();
   SetTargetFPS(60);
   gStateMachine.PushState(new TitleScreenState());
   gStateMachine.PushState(new CountdownState());
@@ -60,10 +70,21 @@ int main(void)
   flappyFont = LoadFontEx("../assets/flappy.ttf", 28, NULL, 0);
   hugeFont = LoadFontEx("../assets/flappy.ttf", 56, NULL, 0);
 
+  jumpSound = LoadSound("../assets/jump.wav");
+  explosionSound = LoadSound("../assets/explosion.wav");
+  hurtSound = LoadSound("../assets/hurt.wav");
+  scoreSound = LoadSound("../assets/score.wav");
+  backgroundMusic = LoadSound("../assets/marios_way.mp3");
+
   while (!WindowShouldClose())
   {
     // Update
     //----------------------------------------------------------------------------------
+    if (!IsSoundPlaying(backgroundMusic))
+    {
+      PlaySound(backgroundMusic);
+    }
+
     if (scrolling || gStateMachine.current->name != Play)
     {
       float dt = GetFrameTime();
@@ -93,7 +114,11 @@ int main(void)
 
   UnloadTexture(background); // Texture unloading
   UnloadTexture(ground);     // Texture unloading
-
+  UnloadSound(jumpSound);
+  UnloadSound(explosionSound);
+  UnloadSound(hurtSound);
+  UnloadSound(scoreSound);
+  UnloadSound(backgroundMusic);
   CloseWindow();
 
   return 0;

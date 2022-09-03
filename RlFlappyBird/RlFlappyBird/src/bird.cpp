@@ -3,7 +3,7 @@
 
 extern int WINDOW_HEIGHT;
 extern int WINDOW_WIDTH;
-
+extern Sound jumpSound;
 Bird::Bird()
 {
   image = LoadTexture("../assets/bird.png");
@@ -26,6 +26,7 @@ void Bird::Update(float dt)
 
   if (IsKeyPressed(KEY_SPACE))
   {
+    PlaySound(jumpSound);
     velocity.y = UPWARD_FORCE;
   }
 

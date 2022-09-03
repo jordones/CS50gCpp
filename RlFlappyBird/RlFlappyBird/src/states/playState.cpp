@@ -56,6 +56,18 @@ void PlayState::Update(float dt)
   for (PipePair &p : pairs)
   {
     p.Update(dt);
+
+    // Check if the pipe was scored
+    if (!p.scored)
+    {
+      if (p.xPos + p.textureWidth < bird.position.x)
+      {
+        score++;
+        std::cout << "Score: " << score << std::endl;
+        p.scored = true;
+      }
+    }
+
     // Pause on Collision
     if (bird.Collides(p.pipes[Pipe::Top]) || bird.Collides(p.pipes[Pipe::Bottom]))
     {

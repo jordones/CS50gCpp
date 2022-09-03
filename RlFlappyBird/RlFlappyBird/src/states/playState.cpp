@@ -60,7 +60,7 @@ void PlayState::Update(float dt)
     if (bird.Collides(p.pipes[Pipe::Top]) || bird.Collides(p.pipes[Pipe::Bottom]))
     {
       scrolling = false;
-      gStateMachine.Change(Empty, {0, false});
+      gStateMachine.Change(Score, {0, false});
     }
   }
 

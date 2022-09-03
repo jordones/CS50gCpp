@@ -3,6 +3,9 @@
 
 class ScoreState : public IState
 {
+protected:
+  int score;
+
 public:
   ScoreState();
   ~ScoreState();

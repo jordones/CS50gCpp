@@ -11,13 +11,12 @@ class PipePair
 protected:
   static const int GAP_HEIGHT = 90;
 
-private:
-  float xPos, yPos;
-  int textureWidth;
-
 public:
   std::vector<Pipe> pipes;
+  float xPos, yPos;
+  int textureWidth;
   bool remove;
+  bool scored;
   PipePair(Texture2D texture, int y);
   void Update(float dt);
   void Render();

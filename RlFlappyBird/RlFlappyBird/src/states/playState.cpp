@@ -1,6 +1,7 @@
 #include "playState.h"
 #include "pipe.h"
 #include "stateMachine.h"
+#include <string>
 
 extern StateMachine gStateMachine;
 extern bool scrolling;
@@ -56,11 +57,23 @@ void PlayState::Update(float dt)
   for (PipePair &p : pairs)
   {
     p.Update(dt);
+
+    // Check if the pipe was scored
+    if (!p.scored)
+    {
+      if (p.xPos + p.textureWidth < bird.position.x)
+      {
+        score++;
+        std::cout << "Score: " << score << std::endl;
+        p.scored = true;
+      }
+    }
+
     // Pause on Collision
     if (bird.Collides(p.pipes[Pipe::Top]) || bird.Collides(p.pipes[Pipe::Bottom]))
     {
       scrolling = false;
-      gStateMachine.Change(Score, {0, false});
+      gStateMachine.Change(Score, {score, false});
     }
   }
 
@@ -77,6 +90,9 @@ void PlayState::Update(float dt)
 void PlayState::Render()
 {
   DrawTextEx(mediumFont, "PlayState", {20, 30}, 14.0f, 1.0f, BLACK);
+  std::string scoreOutput = "Score: " + std::to_string(score);
+  DrawTextEx(mediumFont, scoreOutput.c_str(), {20, 50}, 14.0f, 1.0f, BLACK);
+
   for (PipePair &p : pairs)
     p.Render();
   bird.Render();

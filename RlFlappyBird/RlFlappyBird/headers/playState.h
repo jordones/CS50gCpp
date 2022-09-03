@@ -11,6 +11,7 @@ protected:
   std::vector<PipePair> pairs;
   int previousPipeYCoord;
   float spawnTimer;
+  int score;
 
 public:
   PlayState();

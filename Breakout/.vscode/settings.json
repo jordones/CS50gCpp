@@ -53,6 +53,11 @@
     "type_traits": "cpp",
     "typeinfo": "cpp",
     "variant": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "__hash_table": "cpp",
+    "__node_handle": "cpp",
+    "cmath": "cpp",
+    "optional": "cpp",
+    "unordered_map": "cpp"
   }
 }

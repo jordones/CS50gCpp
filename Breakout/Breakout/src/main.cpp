@@ -1,27 +1,17 @@
 //
 //  main.cpp
-//  RlFlappyBird
-//
-//  Created by jordon on 2022-07-30.
+//  breakout
 //
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
 #include "raylib.h"
-#include "state/stateMachine.h"
+#include "constants.h"
+#include "assetManager.h"
 
-int WINDOW_WIDTH = 512;
-int WINDOW_HEIGHT = 288;
-StateMachine gStateMachine;
-
-// Global Fonts
-//----------------------------------------------------------------------------------
-Font defaultFont;
-//----------------------------------------------------------------------------------
-
-// Global Sounds
-//----------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------
+extern int WINDOW_WIDTH;
+extern int WINDOW_HEIGHT;
+extern StateMachine gStateMachine;
 
 int main(void)
 {
@@ -31,21 +21,10 @@ int main(void)
   InitAudioDevice();
   SetMasterVolume(0.05f);
   SetTargetFPS(60);
+  AssetManager::Load();
   gStateMachine.Change(TitleScreen, {0, false});
 
-  // Textures
-  // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-  //----------------------------------------------------------------------------------
-
-  // Fonts
-  // NOTE: Fonts MUST be loaded after Window initialization
-  //----------------------------------------------------------------------------------
-  defaultFont = GetFontDefault();
-
-  // Sounds
-  // NOTE: Sounds MUST be loaded after AudioDevice initialization
-  //----------------------------------------------------------------------------------
-
+  PlaySound(AssetManager::GetSound("music"));
   while (!WindowShouldClose())
   {
     // Update
